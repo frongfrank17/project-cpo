@@ -1,0 +1,20 @@
+.content-tab-menu {
+    background-color : white;
+}
+.content-tab-main {
+    background-color: #096dd9;
+}
+.icon-img {
+    height: 30px;
+    width: 30px;
+
+  } 
+  .button-menu {
+    margin:20px;
+    padding: 10px;
+    text-align: center;
+  }
+  .button-logout {
+    margin:10px;
+    text-align: center;
+  }
