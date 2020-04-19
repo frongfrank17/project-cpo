@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as ActionMap from '../../Actions/map.Action'
+
 import { Modal } from "antd";
 import {ws} from '../../Configs/ConfigReport'
 import DetailReport from './Detailview/Detail.report'
@@ -39,9 +39,7 @@ class Report extends Component{
         }
             return getReport()
     }
-    PossionMap = location => {
-        this.props.dispatch(ActionMap.ReportAction(location))
-    }
+
     render(){
        
         return (
@@ -49,16 +47,21 @@ class Report extends Component{
                <Modal title="Model" visible={this.state.visible} onOk={this.ModelOk} onCancel={this.ModalCancel}>
                     <DetailReport id={this.state.userId} />
                 </Modal>
-                <div className="container-fix">
-                <h1 style={{textAlign:"center"}}> Report </h1>
-                    <table className="table table-responsive ">
-                    <thead >
-                    <th style={{width:"10%" ,textAlign:"center"}}></th>
-                    <th style={{width:"10%" ,textAlign:"center"}}></th>
-                    <th style={{width:"20%",textAlign:"center"}}>Lisence plate</th>   
-                    
-                    <th style={{width:"40%",textAlign:"center"}}>userReport</th>
-                    <th style={{width:"10%",textAlign:"center"}}>status</th>
+                <div className=" container-fuild ">
+                <h1 > Report </h1>
+                <div className=" container table-responsive ">
+                    <table className="table table-bordered">
+                    <thead style={{width:"100%"}} >
+                    <th style={{ textAlign:"center"}}></th>
+                    <th style={{ textAlign:"center"}}> Lisence plate</th>   
+                    <th style={{ textAlign:"center"}}> Car Brand </th>
+                    <th style={{ textAlign:"center"}}> Car Model </th>
+                    <th style={{ textAlign:"center"}}> Connector </th>
+                    <th style={{ textAlign:"center"}}> Connector </th>
+                    <th style={{ textAlign:"center"}}> Username </th>
+                    <th style={{ textAlign:"center"}}> Phone number </th>
+                    <th style={{ textAlign:"center"}}> E - Mail </th>
+                    <th style={{ textAlign:"center"}}> status </th>
                     </thead>
                         <tbody >
                         {  this.state.row.map((items,_i) => 
@@ -68,21 +71,38 @@ class Report extends Component{
                                                 <img src="https://image.flaticon.com/icons/svg/2674/2674880.svg" height="25px"  widgth="30px"/>
                                             </a>
                                            </td>
-                                           <td>                                             
-                                                <a onClick={()=>this.PossionMap(items.Location)}>
-                                                    <img src="https://image.flaticon.com/icons/svg/854/854878.svg" height="30px" width="30px"/>
-                                               </a>
+                                           <td>
+                                               {items.User_car.Lisence_plate.plate_number+" "+items.User_car.Lisence_plate.plate_province}
+                                           </td>
+                                           <td> 
+                                                {items.User_car.detail_Car.car_brand}
+                                           </td>
+                                           <td>
+                                                {items.User_car.detail_Car.car_model}
+                                           </td>
+                                           <td>
+                                               {items.User_car.detail_Car.connect_type[0]}
+                                           </td>
+                                           <td>
+                                               {items.User_car.detail_Car.connect_type[1]}
+                                           </td>
+                                            <td>
+                                                {items.User_.Profile.first_name+" "+items.User_.Profile.last_name}
                                             </td>
-                                           <td>{items.User_car.Lisence_plate.plate_number+" "+items.User_car.Lisence_plate.plate_province}</td>
-                                            
-
-                                            <td>{items.User_.Profile.first_name+" "+items.User_.Profile.last_name}</td>
-                                            <td> {this.Chkstatus(items.status)}</td>
+                                            <td>
+                                                {items.User_.Contact.phone_number}
+                                            </td>
+                                            <td>
+                                                {items.User_.Contact.email}
+                                            </td>
+                                            <td> 
+                                                {this.Chkstatus(items.status)}
+                                            </td>
                             </tr>
                          )}
                         </tbody>
                     </table>
-
+                </div>
                 </div>
             </div>
         )

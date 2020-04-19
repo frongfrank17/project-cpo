@@ -49,13 +49,13 @@ class Emergency extends Component{
        
         return (
             <div>
-                <Modal title="Model" visible={this.state.visible} onOk={this.ModelOk} onCancel={this.ModalCancel}>
+                <Modal title="Model"  width={'1000px'} visible={this.state.visible} onOk={this.ModelOk} onCancel={this.ModalCancel}>
                     <DetailCell id={this.state.userId} />
                 </Modal>
                 <div className="container-fix">
                 <h1 style={{textAlign:'center'}}> Emergency-cell </h1>
-                    <table className="table table-responsive ">
-                    <thead >
+                    <table className="table table-responsive  ">
+                    <thead  >
                     <th style={{width:"10%" ,textAlign:"center"}}></th>
                     <th style={{width:"10%" ,textAlign:"center"}}></th>
                     <th style={{width:"30%",textAlign:"center"}}>username</th>

@@ -46,15 +46,12 @@ class Index extends Component {
                     </Menu>
                          
                     </Col>
-                    <Col flex={'auto'} className="content-tab-main">
+                    <Col flex={'auto'} >
                     
-                                <Map />
+                                <Table_ />
                       
                     </Col>
-                    <Col flex={'500px'}  style={{padding:"10px"}}>
-                        
-                           <Table_/>
-                    </Col>
+
                 </Row>
                 <Row>
                     

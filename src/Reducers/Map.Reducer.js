@@ -17,12 +17,3 @@ export const Map_User = (state = initialUserState , action) => {
     }
 }
 
-export const Map_Report = (state = initialReportState, action) => {
-    switch (action.type) {
-        case 'REPORT_MAP_ACTION':
-                return { location: action.payload}
-    
-        default:
-            return state
-    }
-}
