@@ -48,7 +48,7 @@ class Report extends Component{
                     <DetailReport id={this.state.userId} />
                 </Modal>
                 <div className=" container-fuild ">
-                <h1 > Report </h1>
+                <p>Report</p>
                 <div className=" container table-responsive ">
                     <table className="table table-bordered">
                     <thead style={{width:"100%"}} >

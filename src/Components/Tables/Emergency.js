@@ -53,7 +53,7 @@ class Emergency extends Component{
                     <DetailCell id={this.state.userId} />
                 </Modal>
                 <div className="container-fix">
-                <h1 style={{textAlign:'center'}}> Emergency-cell </h1>
+                <p>Emergency-cell</p>
                     <table className="table table-responsive  ">
                     <thead  >
                     <th style={{width:"10%" ,textAlign:"center"}}></th>
