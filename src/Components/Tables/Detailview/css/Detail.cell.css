@@ -1,12 +1,41 @@
 .col-profile {
-    padding: 20px;
+    padding: 10px;
     
 }
-.col-margin {
-    margin-bottom: 20px;
+.col-detail {
+    font-size: 17px;
+    font-style: normal;
+    font-weight: bold;
+    color: black;
+    padding-left: 20px;
     
+}
+.col-margin-topic {
+    font-size: 17px;
+    font-style: normal;
+    font-weight: bold;
+    color: black;   
+    padding-left: 10px;
+}
+.col-margin-car {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: bold;
+    color: black;
+    font-size: 12px;
+    margin-top: 3px;   
+   
+} 
+.col-margin-detail {
+    margin-bottom: 5px;   
 }
 .col-car {
-    padding: 20px;
+    padding: 5px;
 }
 
+Text {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: bold;
+    color: black;
+} 

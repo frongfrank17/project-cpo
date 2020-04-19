@@ -23,3 +23,8 @@ table {
     height: 100%;
 
 }
+.font-status {
+    font-size: 10px;
+    font-style: normal;
+    font-weight: bold;
+}

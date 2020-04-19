@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
+import * as ActionMap from '../../Actions/map.Action'
 import { ws } from '../../Configs/ConfigEmergency'
 import './css/Emergency.css'
 import "antd/dist/antd.css";
-import { Modal } from "antd";
+import { Modal ,Button} from "antd";
 import DetailCell from './Detailview/Detail.cell';
 const IO = ws
 class Emergency extends Component{
@@ -35,7 +35,16 @@ class Emergency extends Component{
     ModalCancel = () => {
         this.setState({ visible : false })
     }
-   
+    Chkstatus = status => {
+        if(status == "INPROGRESS") {
+            return getInProgress()
+        }
+        return getSos()
+    }
+    PossionMap = location => {
+        //console.log(location)
+        this.props.dispatch(ActionMap.EmergencyAction(location))
+    }
     render(){
        
         return (
@@ -44,23 +53,34 @@ class Emergency extends Component{
                     <DetailCell id={this.state.userId} />
                 </Modal>
                 <div className="container-fix">
-                <h1>Emergency-cell </h1>
+                <h1 style={{textAlign:'center'}}> Emergency-cell </h1>
                     <table className="table table-responsive ">
                     <thead >
-                    <th style={{width:"20%" ,textAlign:"center"}}>#</th>
+                    <th style={{width:"10%" ,textAlign:"center"}}></th>
+                    <th style={{width:"10%" ,textAlign:"center"}}></th>
                     <th style={{width:"30%",textAlign:"center"}}>username</th>
                     <th style={{width:"20%",textAlign:"center"}}>phone</th>
-                    <th style={{width:"20%",textAlign:"center"}}>Licase plate</th>
                     <th style={{width:"10%",textAlign:"center"}}>status</th>
                     </thead>
                         <tbody >
                         {  this.state.row.map((items,_i) => 
                             <tr key={_i}>
-                                           <td><button onClick={()=>this.ModelOpen(items._id)}>view</button><button onClick={()=>alert(items.Location.latitude+":"+items.Location.longitude)}>map</button></td>
+                                           <td>
+                                               <a   onClick={()=>this.ModelOpen(items._id)}>
+                                               <img src="https://image.flaticon.com/icons/svg/2674/2674880.svg" height="25px"  widgth="30px"/>
+                                                </a>
+                                            </td>
+                                            <td>
+                                               <a size={'default'}     onClick={()=>this.PossionMap(items.Location)}>
+                                                    <img src="https://image.flaticon.com/icons/svg/854/854878.svg" height="30px" width="30px"/>
+                                               </a>
+                                            </td>
                                             <td>{items.User_.Profile.first_name+" "+items.User_.Profile.last_name}</td>
                                             <td>{items.User_.Contact.phone_number}</td>
-                                            <td>{items.User_car.Lisence_plate.plate_number+" "+items.User_car.Lisence_plate.plate_province}</td>
-                                            <td>{items.status}</td>
+                                            
+                                            <td> 
+                                                {this.Chkstatus(items.status)}
+                                             </td>
                             </tr>
                          )}
                         </tbody>
@@ -76,3 +96,9 @@ const  wd = { width:"100%"}
 
 export default connect()(Emergency)
 
+function getSos() {
+    return ( <span class="badge badge-danger font-status">SOS</span> )
+}
+function getInProgress () {
+    return ( <span class="badge badge-warning font-status">IN PROGRESS</span> )
+}

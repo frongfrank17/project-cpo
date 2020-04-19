@@ -34,6 +34,7 @@ export const Logout_Action = () => {
         localStorage.removeItem("token") 
         localStorage.removeItem("authentication" )    
         dispatch(LogoutAction())
+        history.push('/');
     }
 }
 

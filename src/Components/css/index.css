@@ -18,3 +18,14 @@
     margin:10px;
     text-align: center;
   }
+ .tab-menu {
+    height: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+  .tab-topic {
+    margin-top: 20px;
+  }
+
+  

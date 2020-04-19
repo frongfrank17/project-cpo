@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Axios from 'axios'
-import { Row, Col, Divider, Input ,Form, Button} from 'antd';
+import { Row, Col, Typography, Input ,Form, Button ,Spin ,Cascader} from 'antd';
 import './css/Detail.cell.css'
 import 'antd/dist/antd.css';
 import { Production } from '../../../Configs/ConfigEmergency'
-
+ const {Text} = Typography
  class Cell extends Component {
      constructor(props) {
          super(props)
          this.state = {
-                Profile : [] , Contact : [] , Lisence_plate: [] , Detail_car: [] , Service_ : []
+              _id: "",  Profile : [] , Contact : [] , Lisence_plate: [] , Detail_car: [] , Service_ : []
          }
      }
      componentDidMount() {
@@ -20,51 +20,106 @@ import { Production } from '../../../Configs/ConfigEmergency'
                 this.setState({
                     Profile: data.User_.Profile ,
                     Contact:data.User_.Contact,
-                    Lisence_plate: data.User_car ,
+                    Lisence_plate: data.User_car.Lisence_plate ,
                     Detail_car: data.User_car.detail_Car ,
-                    Service_ :  data
+                    Service_ :  data.status ,
+                    _id : data._id
 
                 })
                 
              }
          ).catch(err=>console.log(err))
      }
+     status = () => {
+            if(this.state.Service_ == "SOS") {
+                return Sos()
+            }
+            return Status(this.state.Service_)
+     }
     render() {
-        const { Profile ,Contact , Lisence_plate , Detail_car , Service_ } = this.state
+        const { Profile ,Contact , Lisence_plate , Detail_car , Service_ , _id } = this.state
+     
+            if( _id == "" || _id == null || _id == undefined ) {
+                return(
+                <div style={{textAlign:"center"}}>
+                     <Spin  size="large"  />
+                      </div>
+                )
+            }  
+
         return (
             <div>
                 <Row>
-                    <Col flex={30}><img src={Profile.profile_image}  width="170px"  height="200px"/></Col>
-                    <Col flex={50} className="col-profil">
-                        <h4 className="col-margin">โปรไฟล์</h4>
-                        <h6 className="col-margin"> ชื่อ - สกุล : {Profile.first_name+" "+Profile.last_name}</h6>
-                        <h6 className="col-margin"> เพศ       : {Profile.gender}</h6>
-                        <h6 className="col-margin"> e-mail    : {Contact.email}</h6>
-                        <h6 className="col-margin"> เบอร์โทร    : {Contact.phone_number}</h6>
-                        <h6 className="col-margin"> ทะเบียน  : {Lisence_plate.plate_number+" "+Lisence_plate.plate_province}</h6>
-                    </Col>
+                    <Col flex={0.5}><img src={Profile.profile_image}  width="170px"  height="200px"/></Col>
+                    <Col flex={4} className="col-detail">
+                  
+                  <p className="col-margin-detail"> {Profile.first_name+" "+Profile.last_name}</p>
+                  <p className="col-margin-detail">  Male{Profile.gender}</p>
+                  <p className="col-margin-detail">  {Contact.email}</p>
+                  <p className="col-margin-detail">  {Contact.phone_number}</p>
+                  <p className="col-margin-detail">  {Lisence_plate.plate_number+" "+Lisence_plate.plate_province}</p>
+              </Col>
                 </Row>
                 <Row>
+
                     <Col flex={'auto'} className="col-car">
-                    <h4 className="col-margin">ข้อมูลรถยนต์ </h4>
-                        <h6 className="col-margin">   ยี่ห้อ : {Detail_car.car_brand} รุ่น : {Detail_car.car_model} </h6>
-                        <h6 className="col-margin">    แบตรี่ : {Detail_car.battery_type} ขนาดแบตรี่ : {Detail_car.battery_size}</h6>
-                        <h6 className="col-margin"> หัวชาต : 1 : {Detail_car.connect_type}  2 : {Detail_car.connect_type}</h6>
+                        <Row> 
+                            <Col flex={'auto'} className="col-margin-topic"><p>ยี่ห้อรถยนต์</p></Col> <Col flex={'auto'} className="col-margin-car"><p>{Detail_car.car_brand}</p></Col>
+                            <Col flex={'auto'}  className="col-margin-topic"><p>รุ่นรถยนต์</p></Col><Col flex={'auto'}  className="col-margin-car"><p>{Detail_car.car_model}</p></Col>
+                        </Row>
+                        <Row>
+                             <Col flex={'auto'}  className="col-margin-topic"><p> แบตรี่รถยนต์</p></Col><Col flex={'auto'}  className="col-margin-car"><p>{Detail_car.battery_type}</p></Col>
+                             <Col flex={'auto'}  className="col-margin-topic"><p> ขนาดแบตรี่</p></Col><Col  flex={'auto'}  className="col-margin-car"><p>{Detail_car.battery_size}</p></Col>
+                        </Row>
+                        <Row> 
+                            <Col flex={'auto'}  className="col-margin-topic"><p> หัวชาต</p></Col>
+                            <Col  flex={'auto'} className="col-margin-car"><p>1. {Detail_car.connect_type}</p></Col>
+                            <Col flex={'auto'}  className="col-margin-car"><p>2. {Detail_car.connect_type}</p></Col>
+                        </Row>
                     </Col>
+
                 </Row>
                 <Row>
-                    <Col flex={'auto'} className="col-car">
-                        <Form > 
-                            <Form.Item style={{width:"50%"}} ><Input type="text" placeholder="select" /></Form.Item>
-                            <Button>Select</Button>
-                        </Form>
-                    </Col>
+                    {
+                        this.status()
+                    }
+
                 </Row>
             </div>
         )
+
     }
 }
 
 
+function Sos () {
+    return  (     
+    <>      
+        <Col flex={'auto'} >
+            <Form className="col-margin-topic">
+                <Form.Item > 
+                    <Cascader type="text" placeholder="select"/>
+                </Form.Item>
+            </Form>
+        </Col>
+        <Col flex={'auto'} >
+            <Button>add</Button>
+        </Col>
+    </>    
+    )      
+      
+}
+function Status (status) {
+    return (
+    <>
+        <Col flex={'auto'}>
+            <Row>
+                <Col className="col-margin-topic" >status</Col>
+                <Col> <Text code> {status}</Text> </Col>
+            </Row>
+        </Col>
+    </>
+    )
+}
 
 export default connect()(Cell)

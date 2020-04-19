@@ -15,7 +15,8 @@ import { Button } from 'antd';
  
     render() {
    
-
+                const {location} = this.props.location
+                const report = new window.google.maps.LatLng(location.latitude , location.longitude)
                     return (
                     
                                 <GoogleMap 
@@ -26,7 +27,7 @@ import { Button } from 'antd';
                                         
                                         defaultMapTypeId= 'roadmap'
 
-                                        center= {  new window.google.maps.LatLng(14.979900,100.501762) }
+                                        center= {  report }
 
                                         zoom={10}
                                         
@@ -35,11 +36,11 @@ import { Button } from 'antd';
                                        
                                         <Marker   
 
-                                            position = { new window.google.maps.LatLng(14.979900,100.501762) }         
+                                            position = { report }         
                                         //  onClick={()=> this.setState({isOpen:true})}
-                                            title= "test"  
+                                            title= "Report"  
                                             icon = {  { 
-                                                        url: 'https://image.flaticon.com/icons/svg/584/584517.svg' ,
+                                                        url: 'https://image.flaticon.com/icons/svg/1972/1972991.svg' ,
                                                         anchor: new window.google.maps.Point(40, 40),
                                                         scaledSize: new window.google.maps.Size(40, 40)    
                                                     } } 
@@ -56,6 +57,10 @@ import { Button } from 'antd';
 
 const WrappedMap = withScriptjs(withGoogleMap(LocationMap));
 
-
+const mapStateToProps = (state ) => {
+    return {
+        location: state.Map_Report
+    }
+}
   
- export default connect() (WrappedMap);
+ export default connect(mapStateToProps) (WrappedMap);

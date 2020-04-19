@@ -1,6 +1,7 @@
 import React, { Component  } from 'react'
 import { connect } from 'react-redux';
 import { GoogleMap ,withScriptjs, withGoogleMap, Marker  } from 'react-google-maps' ;
+import { Map_User } from '../../../Reducers/Map.Reducer';
 
 
  class LocationMap extends Component {
@@ -10,12 +11,17 @@ import { GoogleMap ,withScriptjs, withGoogleMap, Marker  } from 'react-google-ma
 
           
     }
-
+    componentDidCatch(){
+      // console.log(">>Catch"+this.props.location.user_location)
+    }
+    componentDidUpdate(){
+      //  console.log("Update"+this.props.location.user_location.latitude)
+    }
  
  
     render() {
-   
-
+            const { user_location } = this.props.location 
+            const user = new window.google.maps.LatLng(user_location.latitude,user_location.longitude)
                     return (
                     
                                 <GoogleMap 
@@ -26,7 +32,7 @@ import { GoogleMap ,withScriptjs, withGoogleMap, Marker  } from 'react-google-ma
                                         
                                         defaultMapTypeId= 'roadmap'
 
-                                        center= {  new window.google.maps.LatLng(14.979900,100.501762) }
+                                        center= {  user }
 
                                         zoom={10}
                                         
@@ -35,9 +41,9 @@ import { GoogleMap ,withScriptjs, withGoogleMap, Marker  } from 'react-google-ma
                                         
                                         <Marker   
 
-                                            position = { new window.google.maps.LatLng(14.979900,100.501762) }         
+                                            position = { user }         
                                         //  onClick={()=> this.setState({isOpen:true})}
-                                            title= "test"  
+                                            title= "Emergency"  
                                             icon = {  { 
                                                         url: 'https://image.flaticon.com/icons/svg/584/584517.svg' ,
                                                         anchor: new window.google.maps.Point(40, 40),
@@ -57,5 +63,9 @@ import { GoogleMap ,withScriptjs, withGoogleMap, Marker  } from 'react-google-ma
 const WrappedMap = withScriptjs(withGoogleMap(LocationMap));
 
 
-  
- export default connect() (WrappedMap);
+  const mapStateToProps = (state) => {
+      return {
+          location: state.Map_User
+      }
+  }
+ export default connect(mapStateToProps) (WrappedMap);
