@@ -54,7 +54,7 @@ import { Button } from 'antd';
         }
     }
 
-
+ 
 const WrappedMap = withScriptjs(withGoogleMap(LocationMap));
 
 const mapStateToProps = (state ) => {
