@@ -25,7 +25,7 @@ class Login extends Component {
             <div className=" container-fluid bg-login">
                 <div className=" container-sm container-md container-lg container-xl" >
                  <Row className="login-containar">
-                 <Col xs={5} sm={8} md={9} lg={11} xl={13} style={{textAlign:"center" ,backgroundColor:"#5DADE2" }}> register </Col>
+                 <Col xs={5} sm={8} md={9} lg={11} xl={13} style={{textAlign:"center" ,backgroundColor:"#5DADE2" }}>  </Col>
                  <Col xs={21} sm={17} md={13} lg={9} xl={11}  >
                  <div className="text-title-form">
                     Log In <p>Station Oparater  </p>
