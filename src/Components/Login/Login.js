@@ -4,6 +4,7 @@ import * as Action from '../../Actions/user.Action'
 import './css/Login.css'
 import 'antd/dist/antd.css';
 import { Form, Input, Button , Row , Col  } from 'antd';
+import { useForm } from 'antd/lib/form/util';
 
 class Login extends Component {
     constructor() {
@@ -16,6 +17,7 @@ class Login extends Component {
     onLogin = () =>{
         let {username , password} = this.state 
         console.log("username:"+username+":"+"password"+password)
+      //  if(username !="" && password !="")
         this.props.dispatch(Action.Login_Action( username , password )) 
     }
     render() {
@@ -30,11 +32,11 @@ class Login extends Component {
                 </div>
                  <Form className="login-form"  >
   
-                    <Form.Item className="login-form-input"  name="username" rules={[ usernameEmpty ,]} >
-                        <Input  placeholder="Username" name="username" onChange={e=>this.onChange(e)} />
+                    <Form.Item className="login-form-input"  name="username" rules={[ {required: true, message: 'Please input your Username!', } ]} >
+                        <Input type="text" placeholder="Username" name="username" onChange={e=>this.onChange(e)} />
                     </Form.Item>
                     <Form.Item  className="login-form-input" name="password" rules={[ passwordEmpty ,]} >
-                        <Input  placeholder="Password" name="password" onChange={e=>this.onChange(e)}/>
+                        <Input type="password" placeholder="Password" name="password" onChange={e=>this.onChange(e)}/>
                     </Form.Item>
 
                   

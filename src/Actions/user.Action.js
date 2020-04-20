@@ -20,10 +20,12 @@ export const Login_Action  = (username,password) => {
             response => {
                 
                 let data = response.data 
+               if( data.success != false ) {
                 localStorage.setItem("token" , data.token) 
                 localStorage.setItem("authentication" , data.success)     
                 dispatch(LoginAction(data))   
                 history.push('/manager'); 
+                }
             }
         )
     }
