@@ -19,8 +19,10 @@ class Emergency extends Component{
     componentDidMount(){
         IO.on('emergency-cell-lists' , response => {
             let result = JSON.parse(response)
+            //console.log(result)
             this.setState( { row : result} )
         })
+        
     }
     ModelOpen = id => {
          
@@ -49,11 +51,11 @@ class Emergency extends Component{
        
         return (
             <div>
-                <Modal title="Model"  width={'1000px'} visible={this.state.visible} onOk={this.ModelOk} onCancel={this.ModalCancel}>
+                <Modal title="Detail user cell"  width={'500px'} visible={this.state.visible} onOk={this.ModelOk} onCancel={this.ModalCancel}>
                     <DetailCell id={this.state.userId} />
                 </Modal>
                 <div className="container-fix">
-                <p>Emergency-cell</p>
+                <p>Emergency List</p>
                     <table className="table table-responsive  ">
                     <thead  >
                     <th style={{width:"10%" ,textAlign:"center"}}></th>
@@ -71,7 +73,7 @@ class Emergency extends Component{
                                                 </a>
                                             </td>
                                             <td>
-                                               <a size={'default'}     onClick={()=>this.PossionMap(items.Location)}>
+                                               <a size={'default'} onClick={()=>this.PossionMap(items._id)}>
                                                     <img src="https://image.flaticon.com/icons/svg/854/854878.svg" height="30px" width="30px"/>
                                                </a>
                                             </td>

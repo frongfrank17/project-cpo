@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
-import { Modal } from "antd";
+import * as Action from '../../Actions/map.Action'
+import { Drawer } from "antd";
 import {ws} from '../../Configs/ConfigReport'
 import DetailReport from './Detailview/Detail.report'
 import './css/Report.css'
@@ -26,29 +26,31 @@ class Report extends Component{
             visible : true ,
             userId: id
         })
+        
     }
-    ModelOk = () => {
-        this.setState({ visible : false})
-    }
+
     ModalCancel = () => {
         this.setState({ visible : false })
     }
     Chkstatus = status => {
-        if(status == "Lock"){
+        console.log(status)
+        if(status == "lockByStaion" ){
             return getLock()
         }
             return getReport()
     }
 
-    render(){
+    render(){          
+    
+    
        
         return (
-            <div className="">
-               <Modal title="Model" visible={this.state.visible} onOk={this.ModelOk} onCancel={this.ModalCancel}>
+            <div >
+               <Drawer width={500}  placement="right" closable={this.ModalCancel} title="Model" visible={this.state.visible} onClose={this.ModalCancel} >
                     <DetailReport id={this.state.userId} />
-                </Modal>
+                </Drawer>
                 <div className=" container-fuild ">
-                <p>Report</p>
+                <p>Report List</p>
                 <div className=" container table-responsive ">
                     <table className="table table-bordered">
                     <thead style={{width:"100%"}} >
@@ -96,7 +98,9 @@ class Report extends Component{
                                                 {items.User_.Contact.email}
                                             </td>
                                             <td> 
-                                                {this.Chkstatus(items.status)}
+                                                
+                                            {this.Chkstatus(items.status)}
+                                                
                                             </td>
                             </tr>
                          )}
@@ -112,6 +116,12 @@ class Report extends Component{
 const  wd = { width:"100%"}
 
 export default connect()(Report)
+function GetStatus (status) {
+    if(status != "lockByStaion") {
+        return getReport()
+    }
+        return getLock()
+}
 function getReport () {
     return (  <span class="badge badge-danger font-status">Report</span>  )
 }

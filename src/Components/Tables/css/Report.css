@@ -28,15 +28,10 @@ table {
 .table-border {
     border: 1px solid black;
 }
-.font-status {
-    font-size: 10px;
-    font-style: normal;
-    font-weight: bold;
+.font-h6 {
+    font-size: 18px;
+    padding-top: 10px;
 }
-p {
-    font-size: 34px;
-    font-weight: bold;
-    font-style: normal;
-    margin-left: 20px;
-    color: black;
+tab-font {
+    padding-top: 50px;
 }

@@ -6,13 +6,17 @@ import { Row, Col, Typography, Input ,Form, Button ,Spin} from 'antd';
 import './css/Detail.report.css'
 import 'antd/dist/antd.css';
 import { Production } from '../../../Configs/ConfigReport'
+import Map from '../../Maps/Report/Map'
+import * as Action from '../../../Actions/map.Action'
     const {Text} = Typography
  class Report extends Component {
      constructor(props) {
          super(props)
          this.state = {
-           _id:"" , Profile : [] , Contact : [] , Lisence_plate: [] , Detail_car: [] , Service_ : []
-         }
+        
+            _id:"" , Profile : [] , Contact : [] , Lisence_plate: [] , Detail_car: [] , Service_ : [] , Report_location: [] ,Lock_satation:[]
+     
+        }
      }
      componentDidMount() {
          Axios.get(Production+"api/stolen/v1/report/getReport?id="+this.props.id).then(
@@ -27,6 +31,8 @@ import { Production } from '../../../Configs/ConfigReport'
                     _id : data._id
 
                 })
+                
+                this.props.dispatch(Action.ReportAction(data.Location))
                 
              }
          ).catch(err=>console.log(err))
@@ -44,43 +50,41 @@ import { Production } from '../../../Configs/ConfigReport'
         return (
             <div>
                 <Row>
-                    <Col flex={0.5}><img src={Profile.profile_image}  width="170px"  height="200px"/></Col>
-                    <Col flex={4} className="col-detail">
-                  
-                  <p className="col-margin-detail"> {Profile.first_name+" "+Profile.last_name}</p>
-                  <p className="col-margin-detail">  Male{Profile.gender}</p>
-                  <p className="col-margin-detail">  {Contact.email}</p>
-                  <p className="col-margin-detail">  {Contact.phone_number}</p>
-                  <p className="col-margin-detail">  {Lisence_plate.plate_number+" "+Lisence_plate.plate_province}</p>
-              </Col>
-                </Row>
-                <Row>
-
-                    <Col flex={'auto'} className="col-car">
-                        <Row> 
-                            <Col flex={'auto'} className="col-margin-topic"><p>ยี่ห้อรถยนต์</p></Col> <Col flex={'auto'} className="col-margin-car"><p>{Detail_car.car_brand}</p></Col>
-                            <Col flex={'auto'}  className="col-margin-topic"><p>รุ่นรถยนต์</p></Col><Col flex={'auto'}  className="col-margin-car"><p>{Detail_car.car_model}</p></Col>
-                        </Row>
-                        <Row>
-                             <Col flex={'auto'}  className="col-margin-topic"><p> แบตรี่รถยนต์</p></Col><Col flex={'auto'}  className="col-margin-car"><p>{Detail_car.battery_type}</p></Col>
-                             <Col flex={'auto'}  className="col-margin-topic"><p> ขนาดแบตรี่</p></Col><Col  flex={'auto'}  className="col-margin-car"><p>{Detail_car.battery_size}</p></Col>
-                        </Row>
-                        <Row> 
-                            <Col flex={'auto'}  className="col-margin-topic"><p> หัวชาต</p></Col>
-                            <Col  flex={'auto'} className="col-margin-car"><p>1. {Detail_car.connect_type}</p></Col>
-                            <Col flex={'auto'}  className="col-margin-car"><p>2. {Detail_car.connect_type}</p></Col>
-                        </Row>
+                    <Col flex={'auto'}>
+                        <div className="container">
+                            <Row>
+                                <Col flex={0.5}> <img src={Profile.profile_image}  width="170px"  height="200px"/> </Col>
+                                <Col flex={4.5}>
+                                    <Row className="tab-font">
+                                        <Col><h6 className="font-h6">{Profile.first_name+" "+Profile.last_name}</h6></Col>    
+                                    </Row>
+                                    <Row className="tab-font">
+                                        <Col><h6 className="font-h6 text-center">{Contact.phone_number}</h6></Col>
+                                        
+                                    </Row>
+                                    <Row className="tab-font">
+                                        <Col><h6 className="font-h6">{Contact.email}</h6></Col>
+                                        </Row>
+                                    <Row className="tab-font">
+                                        <Col><h6 className="font-h6">ทะเบียน :</h6></Col>
+                                        <Col><h6 className="font-h6">{Lisence_plate.plate_number+" "+Lisence_plate.plate_province}</h6></Col>
+                                    </Row>
+                                    <Row className="tab-font">
+                                        <Col><h6 className="font-h6">รถยนต์  :</h6></Col>
+                                        <Col><h6 className="font-h6">{Detail_car.car_brand+"  "+Detail_car.car_model}</h6></Col>
+                                    </Row>
+                                    
+                                </Col>
+                            </Row>
+                        </div>
                     </Col>
-
-                </Row>
-                <Row>
-                <Col flex={'auto'}>
-                    <Row>
-                        <Col className="status" >status </Col>
-                        <Col > <Text className="Text" code> {Service_.status}</Text> </Col>
                     </Row>
-                </Col>
-
+                    <Row>
+                    <Col flex={'auto'}>
+                        <div className="container">
+                            <Map />
+                        </div>
+                    </Col>
                 </Row>
             </div>
         )
@@ -89,5 +93,9 @@ import { Production } from '../../../Configs/ConfigReport'
 
 
 
-
-export default connect()(Report)
+const mapStateToProps = (state, ownProps) => {
+    return {
+        Map: state.Map_Report
+    }
+}
+export default connect(mapStateToProps)(Report)

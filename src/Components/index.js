@@ -26,9 +26,11 @@ class Index extends Component {
             <div >
                 <Row>
                     <Col  flex={'50px'} className="content-tab-menu">
-             
+                    <div className="user-profile">
+
+                    </div>
                     <Menu className="tab-menu" theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-                     
+
                         <Menu.Item key="1" className="tab-topic" onClick={()=>dispatch(Select.emergency())} >
                        
                         <span className="nav-text"  >Emergency</span>

@@ -19,7 +19,7 @@
     text-align: center;
   }
  .tab-menu {
-    height: 100%;
+    height: 86%;
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -27,5 +27,19 @@
   .tab-topic {
     margin-top: 20px;
   }
+  .user-profile {
+    width: 100%;
+    height: 100px;
+    
+    align-items: center;
+    text-align: center;
+    padding: 10px;
 
+  }
+  .text-user {
+    display: inline;
+    font-size: 12px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: normal;
+  }
   

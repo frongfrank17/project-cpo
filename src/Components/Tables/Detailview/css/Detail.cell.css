@@ -1,41 +1,8 @@
-.col-profile {
-    padding: 10px;
-    
+.tab-detail {
+    margin-left: 20px;
 }
-.col-detail {
-    font-size: 17px;
-    font-style: normal;
-    font-weight: bold;
-    color: black;
-    padding-left: 20px;
-    
+h6 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: normal  ;
+ 
 }
-.col-margin-topic {
-    font-size: 17px;
-    font-style: normal;
-    font-weight: bold;
-    color: black;   
-    padding-left: 10px;
-}
-.col-margin-car {
-    font-size: 16px;
-    font-style: normal;
-    font-weight: bold;
-    color: black;
-    font-size: 12px;
-    margin-top: 3px;   
-   
-} 
-.col-margin-detail {
-    margin-bottom: 5px;   
-}
-.col-car {
-    padding: 5px;
-}
-
-Text {
-    font-size: 18px;
-    font-style: normal;
-    font-weight: bold;
-    color: black;
-} 
