@@ -1,4 +1,5 @@
 import { ws } from "../Configs/ConfigEmergency"
+import { useEffect } from "react"
 
 const EmergecyMap = (userMap , serviceMap) => ({
     type:"EMERGENCY_MAP_ACTION", 
@@ -9,23 +10,35 @@ const ReportMap = payload => ({
     type:"REPORT_MAP_ACTION" ,
     payload
 })
+
+
 export const EmergencyAction = (userId) => {
     return dispatch => {
-        //Wdispatch(EmergecyMap(location))
-        ws.emit("select-room" , userId)
-        setInterval(()=>{
-            ws.on(userId , (msg)=> 
-            {                
-                let result = JSON.parse(msg)
-                let userMap = result.userLocation
-                let serviceMap = result.serviceLocation
-                
-            
-               dispatch(EmergecyMap(userMap , serviceMap))
-            })
-        } , 5000)
+      
+        ws.emit("MAPLOCATION" , localStorage.getItem("userIdMap"))
+        if(localStorage.getItem("userIdMap") == userId) {
+           // setInterval(()=>{
+                ws.on(userId , (msg) => {
+                    let result = JSON.parse(msg)
+                    
+                    if( localStorage.getItem("userIdMap")===result.userId ) { 
+                        console.log("INTERVAR >>"+result.userId)
+                    dispatch(EmergecyMap(result.userLocation , result.serviceLocation))
+                    }
+                })
+           // },5000)
+        }else{
+            console.log("Find Not localstorage != userId")
+        }
+  
+
+
+
+
+
     }
 }
+
 
 export const ReportAction = (location) => {
     return dispatch => {

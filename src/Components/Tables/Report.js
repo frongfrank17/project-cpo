@@ -14,6 +14,7 @@ class Report extends Component{
         }
     }
     componentDidMount(){
+        document.title ="Stolen-report"
         IO.on('stolen-report-lists' , response => {
             let result = JSON.parse(response)
             console.log(result)

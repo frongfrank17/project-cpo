@@ -12,12 +12,14 @@ const report_Action = () => ({
 
 export const emergency = () => {
     return dispatch => {
+        
             dispatch(emergency_Action())
     }
 }
 
 export const report = () => {
     return dispatch => {
+        
         dispatch(report_Action())
     }
 }

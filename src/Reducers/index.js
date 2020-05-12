@@ -8,5 +8,5 @@ const combine = combineReducers({
         LoginReducer , Lists  ,Map_User , Map_Report
 })
 
- const  Store = createStore( combine , applyMiddleware( thunk , logger ) )
+ const  Store = createStore( combine , applyMiddleware( thunk ) )
 export default Store

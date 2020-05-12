@@ -17,6 +17,7 @@ class Emergency extends Component{
         }
     }
     componentDidMount(){
+        document.title ="Emergecny-cell"
         IO.on('emergency-cell-lists' , response => {
             let result = JSON.parse(response)
             //console.log(result)
@@ -43,9 +44,14 @@ class Emergency extends Component{
         }
         return getSos()
     }
-    PossionMap = location => {
-        //console.log(location)
-        this.props.dispatch(ActionMap.EmergencyAction(location))
+    PossionMap = userId => {
+        
+        
+            localStorage.setItem("userIdMap" , userId)
+            ws.on("select-room" , userId) 
+            console.log(userId)
+            this.props.dispatch(ActionMap.EmergencyAction(userId))
+        
     }
     render(){
        

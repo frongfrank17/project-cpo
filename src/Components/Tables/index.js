@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useEffect }from 'react';
 import {Col, Row} from 'antd'
  import {useSelector, connect } from 'react-redux'
  import Emergency from './Emergency'
@@ -14,6 +14,7 @@ function Table_ () {
 
 }
 function LayoutMap () {
+
     return (
         <div className="container-fluid">
             <Row>
