@@ -20,7 +20,7 @@ class Emergency extends Component{
         document.title ="Emergecny-cell"
         IO.on('emergency-cell-lists' , response => {
             let result = JSON.parse(response)
-            //console.log(result)
+            console.log(result)
             this.setState( { row : result} )
         })
         
