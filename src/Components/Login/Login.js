@@ -26,8 +26,7 @@ class Login extends Component {
                 <div className=" container-sm container-md container-lg container-xl" >
                  <Row className="login-containar">
                  <Col xs={5} sm={8} md={9} lg={11} xl={13} style={{textAlign:"center" ,backgroundColor:"#5DADE2" }}>
-                 <p>   username : admin </p>
-                 <p>password : admin </p>
+
                    </Col>
                  <Col xs={21} sm={17} md={13} lg={9} xl={11}  >
                  <div className="text-title-form">
@@ -38,10 +37,10 @@ class Login extends Component {
                  <Form className="login-form"  >
   
                     <Form.Item className="login-form-input"  name="username" rules={[ {required: true, message: 'Please input your Username!', } ]} >
-                        <Input type="text" placeholder="Username" name="username" onChange={e=>this.onChange(e)} />
+                        <Input type="text" placeholder="Username : admin" name="username" onChange={e=>this.onChange(e)} />
                     </Form.Item>
                     <Form.Item  className="login-form-input" name="password" rules={[ passwordEmpty ,]} >
-                        <Input type="password" placeholder="Password" name="password" onChange={e=>this.onChange(e)}/>
+                        <Input type="password" placeholder="Password :admin" name="password" onChange={e=>this.onChange(e)}/>
                     </Form.Item>
 
                   
