@@ -29,6 +29,9 @@ class Login extends Component {
                  <Col xs={21} sm={17} md={13} lg={9} xl={11}  >
                  <div className="text-title-form">
                     Log In <p>Station Oparater  </p>
+                 <p>   username : admin </p>
+                 <p>password : admin </p>
+                    
                 </div>
                  <Form className="login-form"  >
   
